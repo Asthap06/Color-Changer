@@ -9,8 +9,10 @@
 <body>
     <header><nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
+
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
@@ -20,21 +22,105 @@
             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
           </div>
         </div>
-      </nav></header>
+      </nav>
+    </header>
       <main>
        <div class="container mt-5 col-6">
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+            <input type="text" class="form-control" placeholder="Chapter Name" aria-label="Recipient's username" aria-describedby="button-addon2">
+              <button id="add_btn" class="btn btn_outline-success" type="button" id="button-addon2">Add</button>
             </div>
-        </div>
           
-          <ul class="list-group">
-            <li class="list-group-item"></li>
+          <ul id = "parentlist" class="list-group">
+            <li class = "list-group-item d-flex justify-content-between">
+                <h3 class = "flex-grow-1">Chapter 1</h3> 
+                <button class = "btn btn-warning mx-3">Edit</button>
+                <button class = "btn btn-danger" onclick="removeChapter(this)">Remove</button></li>
 
           </ul>
        </div>
       </main>
+      <script>
+        let addBtn = document.getElementById('add_btn')
+        addBtn.addEventListener('click', addChapter)
+       // let parentlist = document.getElementById('parentlist');
+        function addChapter(e){
+           if(parentlist.children(0).className == "emptyMsg"){
+               parentlist.children(0).remove()
+           }
+           let currentBtn = e.currentTarget;
+           let currentInput = currentBtn.previousElementSibling
+           let currentChapterName = currentInput.value
+
+
+           let newli = document.createElement('li')
+           //newli.classList.add('list-group-item')
+           newli.textContent = currentInput.value
+
+           newli.className = "list-group-item d-flex justify-content-between"
+           newli.innerHTML=` <h3 class="flex-grow-1">${currentChapterN}</h3> 
+                <button class="btn btn-warning mx-3" onclick="editChapter(this)>Edit</button>
+                <button class="btn btn-danger" onclick="removeChapter(this)">Remove</button>`
+
+           let parentlist = document.getElementById('parentlist');
+           parentlist.appendChild(newli)
+         }
+
+         function removeChapter(currElement){
+            currElement.parentElement.remove()
+            let parentlist = document.getElementById('parentlist');
+            if(parentlist.children.length <= 0){
+                let newEmptyMsg = document.createElement("h3")
+                newEmptyMsg.classList.add("emptyMsg")
+                newEmptyMsg.textContent = "Nothing is here. Please Add a chapter!!!!"
+                parentlist.appendChild(newEmptyMsg)
+            }
+            
+         }
+
+         function editChapter(currElement){
+
+            if(currElement.textContent == "Done"){
+                currentElement.textContent = "Edit"
+                let currentChapterName = currElement.previousElementSibling.value
+                let currHeading = document.createElement('h3')
+                currentHeading.className = "flex-grow-1"
+                currentHeading.textContent = currChapterName
+
+                currElement.parentElement.replaceChild(currentHeading, currElement.previousElementSibling)
+
+
+            }else{
+                curreElement.textContent = "Done"
+           let currChapterName = currElement.previousElementSibling.textContent
+           let currInput = document.createElement('input');
+           currInput.type = "text" 
+             currInput.placeholder = "Chapter Name"
+               currInput.className= "form-control"
+               currInput.value = currChapterName;
+
+               
+                
+           }
+           // currentElement.parentElement.edit()
+        //    currentElement.textContent = "Done"
+        //    let currentChapterName = currentElement.previousElementSibling.textContent
+        //    let currentInput = document.createElement('input');
+        //    currentInput.type = "text" 
+        //      currentInput.placeholder = "Chapter Name"
+        //        currentInput.className= "form-control"
+        //        currentInput.value = currentChapterName;
+
+        //        currentElement.parentElement.replaceChild(currentInput, currentElement.previousElementSibling)
+         }
+      </script>
 </body>
 </html>
+
+
+
+
+
+
+
+//
