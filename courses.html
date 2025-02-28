@@ -43,12 +43,12 @@
       <script>
         let addBtn = document.getElementById('add_btn')
         addBtn.addEventListener('click', addChapter)
-       // let parentlist = document.getElementById('parentlist');
+       let parentlist = document.getElementById('parentlist');
         function addChapter(e){
-           if(parentlist.children(0).className == "emptyMsg"){
-               parentlist.children(0).remove()
-           }
-           let currentBtn = e.currentTarget;
+          if(parentlist.children[0].className == "emptyMsg"){
+            parentlist.children[0].remove()
+          }
+          currentBtn = e.currentTarget;
            let currentInput = currentBtn.previousElementSibling
            let currentChapterName = currentInput.value
 
@@ -59,7 +59,7 @@
 
            newli.className = "list-group-item d-flex justify-content-between"
            newli.innerHTML=` <h3 class="flex-grow-1">${currentChapterN}</h3> 
-                <button class="btn btn-warning mx-3" onclick="editChapter(this)>Edit</button>
+               <button class="btn btn-warning mx-3" onclick="editChapter(this)>Edit</button>
                 <button class="btn btn-danger" onclick="removeChapter(this)">Remove</button>`
 
            let parentlist = document.getElementById('parentlist');
@@ -123,4 +123,3 @@
 
 
 
-//
